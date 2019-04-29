@@ -1,0 +1,9 @@
+dictionary video urls
+key | url
+aladdin.jpg | "https://www.youtube.com/watch?v=foyufD52aog"
+BatmanBegins.jpg | "https://www.youtube.com/watch?v=neY2xVmOfUM"
+Dumbo.jpg | "https://www.youtube.com/watch?v=7NiYVoqBt-8"
+FrozenII.jpg | "https://www.youtube.com/watch?v=suVQt0pfOLc"
+Joker.jpg | "https://www.youtube.com/watch?v=-_DJEzZk2pc"
+ReadyPlayerOne.jpg | "https://www.youtube.com/watch?v=cSp1dM2Vj48"
+TheNewMutans.jpg | "https://www.youtube.com/watch?v=bu9e410C__I"
