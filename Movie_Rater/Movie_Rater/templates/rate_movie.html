@@ -4,16 +4,16 @@
 {% if videoExists%}
 <iframe width="560" height="315" src="{{video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 {%else%}
-<div class="container"><img class="rateImage" src="static/images/{{request.args.get("fileName")}}"/></div>
+<div class="container rating-image"><h3>Rate This Movie!</h3><img class="rateImage" src="static/images/{{request.args.get("fileName")}}"/></div>
 {%endif%}
 <br />
 <form method="POST">
-    <div class="form-group" id="ratingform">
-        <h3>Rate This Movie!</h3>
-        <p>previous rating was {{rating}}</p>
+    <div class="form-css form-group" id="ratingform">
+
+        <p>{{rating}}</p>
         <div class="rating-container" style="margin-left:auto; margin-right:auto;">
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="rating" value="1">
+                <input class="form-check-input" type="radio" name="rating" value="1" checked>
                 <label class="form-check-label" for="inlineCheckbox1">1 Stars</label>
             </div>
             <div class="form-check form-check-inline">
@@ -34,8 +34,9 @@
             </div>
         </div>
         <br />
-        <input class="input-box" type="text" name="summary" />
         {{summary}}
+        <input class="input-box" type="text" name="summary" />
+        
         <input type="submit" />
     </div>
 </form>
