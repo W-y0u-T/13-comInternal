@@ -1,0 +1,26 @@
+.movieImage {
+    background-color: black;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    width: 20rem;
+    height: 25rem;
+}
+
+.movie-rate-btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-title {
+    text-align:center;
+}
+
+.card {
+    width: 26rem;
+    height: 34rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}

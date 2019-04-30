@@ -65,7 +65,7 @@ def rate():
 			rating = movie.rating
 			summary = movie.review
 			if movie.trailer_url == "Empty":
-				videoExists = False
+				videoExists = True
 			else:
 				videoExists = True
 			if request.method== "POST":
@@ -75,8 +75,8 @@ def rate():
 				summary = form["summary"]
 				movie.add_summary(summary)
 				pickle_object()
-				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating)
-	return render_template('rate_movie.html', rating = rating, summary = summary, video = "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = movie.trailer_url
+	return render_template('rate_movie.html', rating = rating, summary = summary, video = "dQw4w9WgXcQ")
 
 @app.route('/upload', methods=["POST","GET"])
 def mainUploader():
@@ -96,4 +96,3 @@ if __name__ == '__main__':
     except ValueError:
         PORT = 5555
     app.run(HOST, PORT, debug = True)
-

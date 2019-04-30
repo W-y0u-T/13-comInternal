@@ -1,16 +1,18 @@
 ﻿{% extends "layout.html"%}
 
 {% block content %}
-{% if videoExists%}
-<iframe width="560" height="315" src="{{video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h3>Rate This Movie!</h3>
+
+{% if video == "Empty"%}
+<iframe width="560" height="315" src="http://youtu.be/{{video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 {%else%}
-<div class="container rating-image"><h3>Rate This Movie!</h3><img class="rateImage" src="static/images/{{request.args.get("fileName")}}"/></div>
+<div class="container rating-image"><img class="rateImage" src="static/images/{{request.args.get("fileName")}}"/></div>
 {%endif%}
+
 <br />
 <form method="POST">
     <div class="form-css form-group" id="ratingform">
-
-        <p>{{rating}}</p>
+        {%if rating == "No previous rating has been found "%}
         <div class="rating-container" style="margin-left:auto; margin-right:auto;">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="rating" value="1" checked>
@@ -34,10 +36,17 @@
             </div>
         </div>
         <br />
-        {{summary}}
+
         <input class="input-box" type="text" name="summary" />
-        
         <input type="submit" />
+
+        {%else%}
+        <p>
+            This has been rated: {{rating}} Stars! <br />
+            Summary:<br />{{summary}}
+        </p>
+        {%endif%}
+
     </div>
 </form>
 
