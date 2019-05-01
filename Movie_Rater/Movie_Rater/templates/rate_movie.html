@@ -3,13 +3,12 @@
 {% block content %}
 <h3 class="rate-header">Rate This Movie!</h3>
 
-{% if video == "Empty"%}
+{% if video == "https://www.youtube.com/embed/Empty?autoplay=1"%}
 <div class="container rating-image"><img class="rateImage" src="static/images/{{request.args.get("fileName")}}" /></div>
 {%else%}
 <div class="iframe-container">
     <iframe src="{{video}}" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-
 {%endif%}
 
 <br />
@@ -39,8 +38,9 @@
             </div>
         </div>
         <br />
-
-        <input class="input-box" type="text" name="summary" />
+        <label>Summary:</label>
+        <input class="input-box" type="text" name="summary" /><br />
+        <label>Youtube ID</label><input class="youtube-box" type="text" name="youtubeID" />
         <input type="submit" />
 
         {%else%}

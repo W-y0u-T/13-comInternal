@@ -6,6 +6,8 @@ import os
 import pickle 
 
 global movies
+path = os.getcwd() +"/static/images"
+app.config['UPLOAD_FOLDER'] = path
 
 # Make the WSGI interface available at the top level so wfastcgi can get it.
 wsgi_app = app.wsgi_app
@@ -46,7 +48,6 @@ movies=[]
 unpickle_object()
 #if the file contained no data it will write new data to it
 if not movies:
-	path = os.getcwd() +"/static/images"
 	for filename in os.listdir(path):
 		movies.append(Movie(filename))
 	pickle_object()
@@ -55,20 +56,18 @@ if not movies:
 
 @app.route('/')
 def hello():
-	for movie in movies:
-		movie.trailer_url = "dQw4w9WgXcQ"
-		pickle_object()
-	unpickle_object()
+
 	return render_template("movies.html", movies = movies)
 
 @app.route('/rate', methods=["GET","POST"])
 def rate():
+	unpickle_object
 	for movie in movies:
 		if movie.filename == request.args.get("fileName"):
 			rating = movie.rating
 			summary = movie.review
 			video = movie.trailer_url
-			if movie.rating == "No previous rating has been found ":
+			if movie.rating == "No previous rating has been found":
 				toRate = True
 			else:
 				toRate = False
@@ -77,13 +76,16 @@ def rate():
 				rate_value = int(form["rating"])
 				movie.rating = rate_value
 				summary = form["summary"]
+				video = form["youtubeID"]
+				movie.trailer_url = video
 				movie.add_summary(summary)
 				pickle_object()
-				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = f"https://www.youtube.com/embed/{video}?autplay=1", toRate = toRate)
-	return render_template('rate_movie.html', rating = rating, summary = summary, video = f"https://www.youtube.com/embed/{video}?autoplay=1")
+				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = f"https://www.youtube.com/embed/{video}?autoplay=1", toRate = toRate)
+	return render_template('rate_movie.html', rating = rating, summary = summary, video = f"https://www.youtube.com/embed/{video}?autoplay=1", toRate = toRate)
 
 @app.route('/upload', methods=["POST","GET"])
 def mainUploader():
+	#for the page with the uploader
 	if request.method == "POST":
 		file = request.files["file"]
 		filename = secure_filename(file.filename)
