@@ -14,7 +14,7 @@ class Movie(object):
 	def __init__(self, filename):
 		self.filename = filename
 		self.review = "No previous review has been found"
-		self.rating = "No previous rating has been found "
+		self.rating = "No previous rating has been found"
 		self.trailer_url="Empty"
 	
 
@@ -55,7 +55,10 @@ if not movies:
 
 @app.route('/')
 def hello():
-
+	for movie in movies:
+		movie.trailer_url = "dQw4w9WgXcQ"
+		pickle_object()
+	unpickle_object()
 	return render_template("movies.html", movies = movies)
 
 @app.route('/rate', methods=["GET","POST"])
@@ -64,10 +67,11 @@ def rate():
 		if movie.filename == request.args.get("fileName"):
 			rating = movie.rating
 			summary = movie.review
-			if movie.trailer_url == "Empty":
-				videoExists = True
+			video = movie.trailer_url
+			if movie.rating == "No previous rating has been found ":
+				toRate = True
 			else:
-				videoExists = True
+				toRate = False
 			if request.method== "POST":
 				form = request.form
 				rate_value = int(form["rating"])
@@ -75,8 +79,8 @@ def rate():
 				summary = form["summary"]
 				movie.add_summary(summary)
 				pickle_object()
-				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = movie.trailer_url
-	return render_template('rate_movie.html', rating = rating, summary = summary, video = "dQw4w9WgXcQ")
+				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = f"https://www.youtube.com/embed/{video}?autplay=1", toRate = toRate)
+	return render_template('rate_movie.html', rating = rating, summary = summary, video = f"https://www.youtube.com/embed/{video}?autoplay=1")
 
 @app.route('/upload', methods=["POST","GET"])
 def mainUploader():

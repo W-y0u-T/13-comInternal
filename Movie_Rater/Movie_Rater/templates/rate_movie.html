@@ -1,18 +1,21 @@
 ﻿{% extends "layout.html"%}
 
 {% block content %}
-<h3>Rate This Movie!</h3>
+<h3 class="rate-header">Rate This Movie!</h3>
 
 {% if video == "Empty"%}
-<iframe width="560" height="315" src="http://youtu.be/{{video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="container rating-image"><img class="rateImage" src="static/images/{{request.args.get("fileName")}}" /></div>
 {%else%}
-<div class="container rating-image"><img class="rateImage" src="static/images/{{request.args.get("fileName")}}"/></div>
+<div class="iframe-container">
+    <iframe src="{{video}}" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 {%endif%}
 
 <br />
 <form method="POST">
     <div class="form-css form-group" id="ratingform">
-        {%if rating == "No previous rating has been found "%}
+        {%if toRate%}
         <div class="rating-container" style="margin-left:auto; margin-right:auto;">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="rating" value="1" checked>
