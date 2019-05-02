@@ -41,7 +41,9 @@
         <label>Summary:</label>
         <input class="input-box" type="text" name="summary" placeholder="Input Summary Here!" /><br />
         <label>Youtube ID</label><input class="youtube-box" type="text" name="youtubeID" placeholder="dQw4w9WgXcQ" />
-
+        <div class="ghost">
+            <input type='checkbox' value="False" name="toRateAgain" checked />
+        </div>
 
         {%else%}
         <p>
@@ -50,12 +52,13 @@
 
         </p>
         <div class="ghost">
+            {{toRate}}
             <input class="form-check-input" type="radio" name="rating" value="{{rating}}" checked>
             <input type="text" name="summary" placeholder="{{summary}}" />
             <label>Youtube ID</label><input class="youtube-box" type="text" name="youtubeID" placeholder="dQw4w9WgXcQ" />
         </div>
         <label>Check this box to rate again</label>
-        <input type="checkbox" value="True" name="toRate" />
+        <input type="checkbox" value="True" name="toRateAgain" />
         {%endif%}
         <input type="submit" />
     </div>

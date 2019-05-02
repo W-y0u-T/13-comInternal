@@ -14,6 +14,7 @@ wsgi_app = app.wsgi_app
 class Movie(object):
 
 	def __init__(self, filename):
+		self.title = "Place Holder"
 		self.filename = filename
 		self.review = "No previous review has been found"
 		self.rating = "No previous rating has been found"
@@ -53,12 +54,13 @@ if not movies:
 	pickle_object()
 
 
-
+#app.route for home page
 @app.route('/')
 def hello():
-
+	#returns the template and sends the movies list to allow the page to display all of the movies at the same time
 	return render_template("movies.html", movies = movies)
 
+#app.route for rating page and allows the client to view their previous rating and change it.
 @app.route('/rate', methods=["GET","POST"])
 def rate():
 	unpickle_object
@@ -75,13 +77,15 @@ def rate():
 				form = request.form
 				rate_value = int(form["rating"])
 				movie.rating = rate_value
-				checkbox = form["toRate"]
+				checkbox = form["toRateAgain"]
 				summary = form["summary"]
 				video = form["youtubeID"]
 				movie.trailer_url = video
 				movie.add_summary(summary)
 				if checkbox == "True":
 					toRate = True
+				else:
+					toRate = False
 				pickle_object()
 				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = video, toRate = toRate)
 	return render_template('rate_movie.html', rating = rating, summary = summary, video = video, toRate = toRate)
