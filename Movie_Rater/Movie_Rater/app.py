@@ -64,11 +64,13 @@ def hello():
 @app.route('/rate', methods=["GET","POST"])
 def rate():
 	unpickle_object
+	#for loop to make sure the data we are sending to and from the page is going to the right place
 	for movie in movies:
 		if movie.filename == request.args.get("fileName"):
 			rating = movie.rating
 			summary = movie.review
 			video = movie.trailer_url
+			#to check if the page needs to display the rating options or the previous rating
 			if movie.rating == "No previous rating has been found":
 				toRate = True
 			else:
@@ -82,6 +84,7 @@ def rate():
 				video = form["youtubeID"]
 				movie.trailer_url = video
 				movie.add_summary(summary)
+				#if statement to see if the user wants to change the rating
 				if checkbox == "True":
 					toRate = True
 				else:
