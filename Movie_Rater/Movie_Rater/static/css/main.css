@@ -86,3 +86,7 @@ body {
     max-width: 25.0625rem;
 }
 
+.ghost{
+    visibility:hidden;
+    display:none;
+}

@@ -75,13 +75,16 @@ def rate():
 				form = request.form
 				rate_value = int(form["rating"])
 				movie.rating = rate_value
+				checkbox = form["toRate"]
 				summary = form["summary"]
 				video = form["youtubeID"]
 				movie.trailer_url = video
 				movie.add_summary(summary)
+				if checkbox == "True":
+					toRate = True
 				pickle_object()
-				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = f"https://www.youtube.com/embed/{video}?autoplay=1", toRate = toRate)
-	return render_template('rate_movie.html', rating = rating, summary = summary, video = f"https://www.youtube.com/embed/{video}?autoplay=1", toRate = toRate)
+				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = video, toRate = toRate)
+	return render_template('rate_movie.html', rating = rating, summary = summary, video = video, toRate = toRate)
 
 @app.route('/upload', methods=["POST","GET"])
 def mainUploader():
