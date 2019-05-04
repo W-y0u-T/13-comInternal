@@ -15,6 +15,7 @@ class Movie(object):
 
 	def __init__(self, filename):
 		self.title = "Place Holder"
+		self.year = "xxxx"
 		self.filename = filename
 		self.review = "No previous review has been found"
 		self.rating = "No previous rating has been found"

@@ -16,36 +16,11 @@
     <div class="form-css form-group" id="ratingform">
         <!-- jinja  if statement to display different variations of the form when there is a previous rating or not -->
         {%if toRate%}
-        <div class="rating-container" style="margin-left:auto; margin-right:auto;">
-            <div class="ghost">
-                <input class="form-check-input" type="radio" name="rating" value="No Rating Entered" checked>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="rating" value="1 Stars" >
-                <label class="form-check-label" for="inlineCheckbox1">1 Stars</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="rating" value="2 Stars">
-                <label class="form-check-label" for="inlineCheckbox2">2 Stars</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="rating" value="3 Stars">
-                <label class="form-check-label" for="inlineCheckbox3">3 Stars</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="rating" value="4 Stars">
-                <label class="form-check-label" for="inlineCheckbox4">4 Stars</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="rating" value="5 Stars">
-                <label class="form-check-label" for="inlineCheckbox5">5 Stars</label>
-            </div>
-        </div>
+        <input type="range" name="rating" min="0" max="10" />
         <br />
         <label>Summary:</label>
         <input class="input-box" type="text" name="summary" placeholder="Input Summary Here!" value="No Summary Entered" /><br />
         <input class="youtube-box" type="text" name="youtubeID" placeholder="Input Youtube Summary Here!" value="dQw4w9WgXc" />
-        <input class=""
         <div class="ghost">
             <input type='checkbox' value="False" name="toRateAgain" checked />
         </div>
@@ -53,7 +28,7 @@
         {%else%}
         <!-- Displays the previous rating and has options to allow the user to change them if need be-->
         <p>
-            This has been rated: {{rating}} <br />
+            This has been rated: {{rating}}/10 Stars <br />
             Summary:<br />{{summary}}
 
         </p>
