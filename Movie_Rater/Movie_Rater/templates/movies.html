@@ -7,7 +7,7 @@
             <div class="card " style="max-width: 21rem; max-height: 36rem;">
                 <img src="{{url_for('static', filename = 'images/' + movie.filename)}}" class="movieImage" />
                 <div class="card-body">
-                    <h5 class="card-title">{{movie.filename}}</h5>
+                    <h5 class="card-title">{{movie.title}}</h5>
                     <a href="rate?fileName={{movie.filename}}" class="movie-rate-btn btn btn-primary">Rate This Movie!</a>
                 </div>
             </div>

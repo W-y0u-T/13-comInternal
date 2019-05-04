@@ -77,13 +77,13 @@ def rate():
 				toRate = False
 			if request.method== "POST":
 				form = request.form
-				rate_value = int(form["rating"])
-				movie.rating = rate_value
+				rate_value = form["rating"]
 				checkbox = form["toRateAgain"]
 				summary = form["summary"]
 				video = form["youtubeID"]
 				movie.trailer_url = video
 				movie.add_summary(summary)
+				movie.rating = rate_value
 				#if statement to see if the user wants to change the rating
 				if checkbox == "True":
 					toRate = True
