@@ -16,6 +16,7 @@ class Movie(object):
 	def __init__(self, filename):
 		self.title = "Place Holder"
 		self.year = "xxxx"
+		self.director = "Place Holder"
 		self.filename = filename
 		self.review = "No previous review has been found"
 		self.rating = "No previous rating has been found"
@@ -82,9 +83,15 @@ def rate():
 				checkbox = form["toRateAgain"]
 				summary = form["summary"]
 				video = form["youtubeID"]
+				title = form["title"]
+				year = form["year"]
+				director = form["direct"]
 				movie.trailer_url = video
 				movie.add_summary(summary)
 				movie.rating = rate_value
+				movie.title = title
+				movie.year = year
+				movie.director = director
 				#if statement to see if the user wants to change the rating
 				if checkbox == "True":
 					toRate = True
