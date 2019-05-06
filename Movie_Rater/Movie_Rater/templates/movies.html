@@ -1,10 +1,10 @@
 ﻿{% extends "layout.html" %}
-<div class="container-fluid">
+<div class="container">
     {% block content %}
     <div class="row">
         {% for movie in movies %}
         <div class="col">
-            <div class="card " style="max-width: 21rem; max-height: 36rem;">
+            <div class="card " style="max-width: 21rem; max-height: 37rem;">
                 <img src="{{url_for('static', filename = 'images/' + movie.filename)}}" class="movieImage" />
                 <div class="card-body">
                     <h5 class="card-title">{{movie.title}}</h5>
@@ -16,6 +16,10 @@
                 </div>
             </div>
         </div>
+            {%if loop.index is divisibleby 4 and not loop.last%}
+            </div><div class="row">
+            {% endif %}
+        <!-- if last column in row -->
         {% endfor %}
     </div>
     {% endblock %}

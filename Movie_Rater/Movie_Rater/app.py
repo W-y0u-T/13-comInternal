@@ -48,6 +48,7 @@ def unpickle_object():
 
 
 movies=[]
+#first runs this function to read file and places it into a 
 unpickle_object()
 #if the file contained no data it will write new data to it
 if not movies:
@@ -77,6 +78,7 @@ def rate():
 				toRate = True
 			else:
 				toRate = False
+				#requests information from the form
 			if request.method== "POST":
 				form = request.form
 				rate_value = form["rating"]

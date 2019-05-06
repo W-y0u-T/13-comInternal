@@ -3,36 +3,37 @@
 {% block content %}
 <h3 class="rate-header">Rate This Movie!</h3>
 <!-- checks if the movie has a video url attatched to it and will embed a video if there is-->
-{% if video != "Empty"%}
-<div class="iframe-container">
-    <iframe src="https://www.youtube.com/embed/{{video}}?autoplay=1" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-{%else%}
-<div class="container rating-image"><img class="rateImage" src="static/images/{{request.args.get("fileName")}}" /></div>
-{%endif%}
+
 
 <br />
 <form method="POST">
     <div class="form-css form-group" id="ratingform">
         <!-- jinja  if statement to display different variations of the form when there is a previous rating or not -->
         {%if toRate%}
-
-        <label>Title:</label><input type="text" name="title" /><br />
-        <label>Year Created:</label><input type="text" name="year" /><br />
-        <label>Director:</label><input type="text" name="direct" /><br />
+        <div class="container rating-image"><img class="rateImage" src="static/images/{{request.args.get("fileName")}}" /></div>
+        <label>Title:</label><input type="text" name="title" required /><br />
+        <label>Year Created:</label><input type="text" name="year" required /><br />
+        <label>Director:</label><input type="text" name="direct" required /><br />
         <label>Rating:</label>
         <p>
             0<input type="range" name="rating" min="0" max="10" />10
         </p>
         <br />
         <label>Summary:</label>
-        <input class="input-box" type="text" name="summary" placeholder="Input Summary Here!" value="No Summary Entered" /><br />
-        <input class="youtube-box" type="text" name="youtubeID" placeholder="Input Youtube Summary Here!" value="dQw4w9WgXcQ" />
+        <input class="input-box" type="text" name="summary" placeholder="Input Summary Here!" required /><br />
+        <input class="youtube-box" type="text" name="youtubeID" placeholder="Input Youtube Summary Here!" required />
         <div class="ghost">
             <input type='checkbox' value="False" name="toRateAgain" checked />
         </div>
 
         {%else%}
+        {% if video != "Empty"%}
+        <div class="iframe-container">
+            <iframe src="https://www.youtube.com/embed/{{video}}?autoplay=1" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        {%else%}
+        <div class="container rating-image"><img class="rateImage" src="static/images/{{request.args.get("fileName")}}" /></div>
+        {%endif%}
         <!-- Displays the previous rating and has options to allow the user to change them if need be-->
         <p>
             This has been rated: {{rating}}/10 Stars <br />
@@ -59,3 +60,55 @@
 
 
 {% endblock %}
+
+<!--<div class="card">
+
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Sign in</strong>
+    </h5>
+
+    <div class="card-body px-lg-5 pt-0">
+
+        <form class="md-form" style="color: #757575;">
+
+            <label for="input">Text input</label>
+            <input type="text" id="input" class="form-control" placeholder="">
+
+            <label for="input">Text input</label>
+            <input type="text" id="input" class="form-control" placeholder="">
+
+            <label for="input">Text input</label>
+            <input type="text" id="input" class="form-control" placeholder="">
+
+            <div class="range-field w-10">
+                <input type="range" min="0" max="100" id="slider">
+            </div>
+
+            <label for="textarea">Textarea input</label>
+            <textarea class="form-control md-textarea" id="textarea" placeholder=""></textarea>
+
+
+            <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
+
+            <div class="text-center">
+                <p>Not a member?
+                    <a href="">Register</a>
+                </p>
+
+                <p>or sign in with:</p>
+                <a type="button" class="btn-floating btn-fb btn-sm">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a type="button" class="btn-floating btn-tw btn-sm">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a type="button" class="btn-floating btn-li btn-sm">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a type="button" class="btn-floating btn-git btn-sm">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>-->
