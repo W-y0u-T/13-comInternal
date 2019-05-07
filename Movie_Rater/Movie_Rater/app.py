@@ -4,8 +4,10 @@ from werkzeug import secure_filename
 app = Flask(__name__)
 import os
 import pickle 
+import operator
 
-global movies
+global movies, movies_by_year
+
 path = os.getcwd() +"/static/images"
 app.config['UPLOAD_FOLDER'] = path
 
@@ -29,14 +31,14 @@ class Movie(object):
 
 fname = "movies_list.pkl"
 #function which stores the movie class instances into a pickle file
-def pickle_object():
+def pickle_object(list,fname):
 	#opens file 
 	with open(fname, "wb") as fout:
 		#converts the list into a pickle file
-		pickle.dump(movies, fout, protocol=-1)
+		pickle.dump(list, fout, protocol=-1)
 
 #function which takes the pickle file and turns it back into a list filled with class instances
-def unpickle_object():
+def unpickle_object(list, fname):
 	global movies
 	#checks if file contains anything or exists and then opens and unpickles it 
 	if os.path.isfile(fname):
@@ -44,10 +46,18 @@ def unpickle_object():
 			with open(fname, "rb") as fin:
 				movies = pickle.load(fin)
 
+def sort_list_by_year():
+	global movies
+	return(sorted(movies, key=operator.attrgetter('score')))
+
+
+
+
 
 
 
 movies=[]
+sorted_movies = []
 #first runs this function to read file and places it into a 
 unpickle_object()
 #if the file contained no data it will write new data to it
@@ -61,6 +71,7 @@ if not movies:
 @app.route('/')
 def hello():
 	#returns the template and sends the movies list to allow the page to display all of the movies at the same time
+
 	return render_template("movies.html", movies = movies)
 
 #app.route for rating page and allows the client to view their previous rating and change it.
