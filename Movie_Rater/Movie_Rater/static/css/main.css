@@ -72,7 +72,8 @@ body {
 
 .card {
     padding: 0 0 0 0!important;
-    max-height: 34rem;
+    max-height: 60rem;
+    max-width: 50rem;
     margin-left: 2rem;
     margin-right: 2rem;
     background-color: #343a40 !important;
@@ -81,6 +82,16 @@ body {
     align-content:center;
 }
 
+.card-rate{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.m-mix {
+    margin-right: .5rem !important;
+
+    box-sizing: border-box;
+}
 .col {
     padding: 0px 0px 0px 0px;
     max-width: 25.0625rem;
@@ -89,4 +100,8 @@ body {
 .ghost{
     visibility:hidden;
     display:none;
+}
+
+.form-control{
+    color:white !important;
 }
