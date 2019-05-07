@@ -6,109 +6,71 @@
 
 
 <br />
-<form method="POST">
-    <div class="form-css form-group" id="ratingform">
-        <!-- jinja  if statement to display different variations of the form when there is a previous rating or not -->
-        {%if toRate%}
-        <div class="container rating-image"><img class="rateImage" src="static/images/{{request.args.get("fileName")}}" /></div>
-        <label>Title:</label><input type="text" name="title" required /><br />
-        <label>Year Created:</label><input type="text" name="year" required /><br />
-        <label>Director:</label><input type="text" name="direct" required /><br />
-        <label>Rating:</label>
-        <p>
-            0<input type="range" name="rating" min="0" max="10" />10
-        </p>
-        <br />
-        <label>Summary:</label>
-        <input class="input-box" type="text" name="summary" placeholder="Input Summary Here!" required /><br />
-        <input class="youtube-box" type="text" name="youtubeID" placeholder="Input Youtube Summary Here!" required />
-        <div class="ghost">
-            <input type='checkbox' value="False" name="toRateAgain" checked />
-        </div>
 
-        {%else%}
+<div class="form-css form-group" id="ratingform">
+    <!-- jinja  if statement to display different variations of the form when there is a previous rating or not -->
+    <!-- Displays the previous rating and has options to allow the user to change them if need be-->
+
+</div>
+<div class="card">
+
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Rate This Movie!</strong>
+    </h5>
+
+    <div class="card-body" style="height:1000px">
         {% if video != "Empty"%}
         <div class="iframe-container">
             <iframe src="https://www.youtube.com/embed/{{video}}?autoplay=1" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         {%else%}
-        <div class="container rating-image"><img class="rateImage" src="static/images/{{request.args.get("fileName")}}" /></div>
+        <div class="container rating-image card-img-top"><img class="rateImage" src="static/images/{{request.args.get("fileName")}}" /></div>
         {%endif%}
-        <!-- Displays the previous rating and has options to allow the user to change them if need be-->
-        <p>
-            This has been rated: {{rating}}/10 Stars <br />
-            Summary:<br />{{summary}}
+        <form class="md-form" style="color: #757575;" method="POST">
+            {%if toRate%}
 
-        </p>
-        <!-- Hidden form inputs that the user cannot use because Key Errors would occur-->
-        <div class="ghost">
-            <label>Title:</label><input type="text" name="title" value="Place Holder" />
-            <label>Year Created:</label><input type="text" name="year" value="xxxx" />
-            <label>Director:</label><input type="text" name="direct" value="Place Holder" />
-            {{toRate}}
-            <input class="form-check-input" type="radio" name="rating" value="{{rating}}" checked>
-            <input type="text" name="summary" placeholder="{{summary}}" />
-            <input class="youtube-box" type="text" name="youtubeID" placeholder="Input Youtube ID" value="{{video}}" />
-            <input type="radio" value="false" name="toRateAgain" checked />
-        </div>
-        <label>Check this box to rate again or change details</label>
-        <input type="radio" value="True" name="toRateAgain" />
-        {%endif%}
-        <input type="submit" />
+            <label for="input1">Title</label>
+            <input type="text" id="input1" class="form-control" placeholder="" name="title">
+
+            <label for="input2">Year</label>
+            <input type="text" id="input2" class="form-control" placeholder="" name="year">
+
+            <label for="input3">Director</label>
+            <input type="text" id="input3" class="form-control" placeholder="" name="direct">
+
+            <div class="range-field w-10">
+                <input type="range" min="0" max="10" id="slider" name="rating">
+            </div>
+
+            <label for="textarea">Summary</label>
+            <textarea class="form-control md-textarea" id="textarea" placeholder="" name="summary"></textarea>
+
+            <label for="input3">Video code</label>
+            <input type="text" id="input3" class="form-control" placeholder="" name="youtubeID">
+            {%else%}
+            <p>
+                This has been rated: {{rating}}/10 Stars <br />
+                Summary:<br />{{summary}}
+
+            </p>
+            Hidden form inputs that the user cannot use because Key Errors would occur
+            <div class="ghost">
+                <label>Title:</label><input type="text" name="title" value="Place Holder" />
+                <label>Year Created:</label><input type="text" name="year" value="xxxx" />
+                <label>Director:</label><input type="text" name="direct" value="Place Holder" />
+                {{toRate}}
+                <input class="form-check-input" type="radio" name="rating" value="{{rating}}" checked>
+                <input type="text" name="summary" placeholder="{{summary}}" />
+                <input class="youtube-box" type="text" name="youtubeID" placeholder="Input Youtube ID" value="{{video}}" />
+                <input type="radio" value="false" name="toRateAgain" checked />
+            </div>
+            <label>Check this box to rate again or change details</label>
+            <input type="radio" value="True" name="toRateAgain" />
+            {%endif%}
+            <input type="submit" />
+        </form>
     </div>
-</form>
+</div>
 
 
 {% endblock %}
-
-<!--<div class="card">
-
-    <h5 class="card-header info-color white-text text-center py-4">
-        <strong>Sign in</strong>
-    </h5>
-
-    <div class="card-body px-lg-5 pt-0">
-
-        <form class="md-form" style="color: #757575;">
-
-            <label for="input">Text input</label>
-            <input type="text" id="input" class="form-control" placeholder="">
-
-            <label for="input">Text input</label>
-            <input type="text" id="input" class="form-control" placeholder="">
-
-            <label for="input">Text input</label>
-            <input type="text" id="input" class="form-control" placeholder="">
-
-            <div class="range-field w-10">
-                <input type="range" min="0" max="100" id="slider">
-            </div>
-
-            <label for="textarea">Textarea input</label>
-            <textarea class="form-control md-textarea" id="textarea" placeholder=""></textarea>
-
-
-            <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
-
-            <div class="text-center">
-                <p>Not a member?
-                    <a href="">Register</a>
-                </p>
-
-                <p>or sign in with:</p>
-                <a type="button" class="btn-floating btn-fb btn-sm">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a type="button" class="btn-floating btn-tw btn-sm">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a type="button" class="btn-floating btn-li btn-sm">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a type="button" class="btn-floating btn-git btn-sm">
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
-        </form>
-    </div>
-</div>-->
