@@ -31,14 +31,14 @@ class Movie(object):
 
 fname = "movies_list.pkl"
 #function which stores the movie class instances into a pickle file
-def pickle_object(list,fname):
+def pickle_object():
 	#opens file 
 	with open(fname, "wb") as fout:
 		#converts the list into a pickle file
-		pickle.dump(list, fout, protocol=-1)
+		pickle.dump(movies, fout, protocol=-1)
 
 #function which takes the pickle file and turns it back into a list filled with class instances
-def unpickle_object(list, fname):
+def unpickle_object():
 	global movies
 	#checks if file contains anything or exists and then opens and unpickles it 
 	if os.path.isfile(fname):
@@ -48,7 +48,7 @@ def unpickle_object(list, fname):
 
 def sort_list_by_year():
 	global movies
-	return(sorted(movies, key=operator.attrgetter('score')))
+	return(sorted(movies, key=operator.attrgetter('year')))
 
 
 
@@ -71,7 +71,10 @@ if not movies:
 @app.route('/')
 def hello():
 	#returns the template and sends the movies list to allow the page to display all of the movies at the same time
-
+	sort = request.args.get("sortBy")
+	sorted_movies = sort_list_by_year()
+	if sort == "year":
+		return render_template("movies.html", movies = sorted_movies )
 	return render_template("movies.html", movies = movies)
 
 #app.route for rating page and allows the client to view their previous rating and change it.
