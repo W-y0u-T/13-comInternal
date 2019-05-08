@@ -3,9 +3,18 @@
 {% block content %}
 
 <form method="POST" enctype="multipart/form-data">
-    <input type="file" name="file" /><br />
-    <input type="text" name="youtubeID" placeholder="Enter Youtube ID" /><br />
-    <input type="text" name="title" placeholder="Title" /><br />
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                   aria-describedby="inputGroupFileAddon01" name="file">
+            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        </div>
+    </div>
+    <input type="text" name="youtubeID" placeholder="Enter Youtube ID" required/><br />
+    <input type="text" name="title" placeholder="Title" required/><br />
     <input type="submit" />
 </form>
 

@@ -50,6 +50,10 @@ def sort_list_by_year():
 	global movies
 	return(sorted(movies, key=operator.attrgetter('year')))
 
+def sort_list_by_alphabet():
+	global movies
+	return(sorted(movies, key=operator.attrgetter('title')))
+
 
 
 
@@ -70,12 +74,16 @@ if not movies:
 #app.route for home page
 @app.route('/')
 def hello():
-	#returns the template and sends the movies list to allow the page to display all of the movies at the same time
+	#checks which if the user wants the movies to be sorted by year or alphabet then returns the movies and 
 	sort = request.args.get("sortBy")
 	sorted_movies = sort_list_by_year()
 	if sort == "year":
-		return render_template("movies.html", movies = sorted_movies )
-	return render_template("movies.html", movies = movies)
+		sorted_movies = sort_list_by_year()
+		return render_template("movies.html", movies = sorted_movies)
+	else:
+		sorted_movies = sort_list_by_alphabet()
+		return render_template("movies.html", movies = sorted_movies)
+	
 
 #app.route for rating page and allows the client to view their previous rating and change it.
 @app.route('/rate', methods=["GET","POST"])
