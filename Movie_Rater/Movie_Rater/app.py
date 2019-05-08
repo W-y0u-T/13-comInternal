@@ -16,8 +16,8 @@ wsgi_app = app.wsgi_app
 class Movie(object):
 
 	def __init__(self, filename):
-		self.title = "Place Holder"
-		self.year = "xxxx"
+		self.title = "A Place Holder"
+		self.year = "2000"
 		self.director = "Place Holder"
 		self.filename = filename
 		self.review = "No previous review has been found"
