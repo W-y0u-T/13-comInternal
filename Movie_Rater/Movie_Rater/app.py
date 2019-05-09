@@ -95,8 +95,10 @@ def rate():
 			rating = movie.rating
 			summary = movie.review
 			video = movie.trailer_url
+			rateAgain = request.args.get("toRate")
+			
 			#to check if the page needs to display the rating options or the previous rating
-			if movie.rating == "No previous rating has been found":
+			if rateAgain == "True" or movie.review =="No previous rating has been found":
 				toRate = True
 			else:
 				toRate = False
@@ -117,12 +119,9 @@ def rate():
 				movie.year = year
 				movie.director = director
 				#if statement to see if the user wants to change the rating
-				if checkbox == "True":
-					toRate = True
-				else:
-					toRate = False
+				
 				pickle_object()
-				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = video, toRate = toRate)
+				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = video, toRate = False)
 	return render_template('rate_movie.html', rating = rating, summary = summary, video = video, toRate = toRate)
 
 @app.route('/upload', methods=["POST","GET"])
