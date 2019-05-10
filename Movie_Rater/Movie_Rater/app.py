@@ -119,7 +119,6 @@ def rate():
 				movie.year = year
 				movie.director = director
 				#if statement to see if the user wants to change the rating
-				
 				pickle_object()
 				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = video, toRate = False)
 	return render_template('rate_movie.html', rating = rating, summary = summary, video = video, toRate = toRate)
