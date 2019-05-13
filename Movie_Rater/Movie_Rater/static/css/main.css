@@ -20,7 +20,7 @@ body {
 
 .rateImage
 {
-    width: 50rem;
+    max-width: 48rem;
 }
 .iframe-container {
     display:block;
@@ -29,8 +29,10 @@ body {
     max-width: 560px;
     max-height: 315px;
 }
-.rating-image{
-    text-align:center;
+.rating-image {
+    text-align: center;
+    max-height: 60rem;
+    max-width: 50rem;
 }
 
 .rate-header{
@@ -73,7 +75,6 @@ body {
 
 .card {
     padding: 0 0 0 0!important;
-    max-height: 60rem;
     max-width: 50rem;
     margin-left: 2rem;
     margin-right: 2rem;
@@ -125,5 +126,11 @@ body {
 .row{
     max-width:100rem;
     margin-left: auto;
+    margin-right:auto;
+}
+
+.center-box{
+    display:block;
+    margin-left:auto;
     margin-right:auto;
 }

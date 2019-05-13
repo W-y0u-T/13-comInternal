@@ -1,24 +1,26 @@
 ﻿{% extends "layout.html"%}
-
+{%set current = 2%}
 {% block content %}
+<div class="card center-box">
+    <form method="POST" enctype="multipart/form-data">
+        <div class="card-body">
+            <p class="h4 mb-4 text-center">Upload a File!</p>
 
-<form method="POST" enctype="multipart/form-data">
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+            <div class="input-group ">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                           aria-describedby="inputGroupFileAddon01" name="file">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+            </div>
+            <input type="text" name="youtubeID" placeholder="Enter Youtube ID"  /><br />
+            <input type="text" name="title" placeholder="Title" required /><br />
+            <button class="btn btn-info btn-block my-4" type="submit">Submit</button>
         </div>
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="inputGroupFile01"
-                   aria-describedby="inputGroupFileAddon01" name="file">
-            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-        </div>
-    </div>
-    <input type="text" name="youtubeID" placeholder="Enter Youtube ID" required/><br />
-    <input type="text" name="title" placeholder="Title" required/><br />
-    <input type="submit" />
-</form>
-
+    </form>
+</div>
 {% endblock %}
-<!--to add
-https://mdbootstrap.com/plugins/jquery/file-upload/
-    -->
+
