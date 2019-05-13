@@ -21,10 +21,10 @@ class Movie(object):
 		self.director = "Place Holder"
 		self.filename = filename
 		self.review = "No previous review has been found"
-		self.ratingOverall = "Empty"
-		self.ratingPlt = ""
-		self.ratingAct = ""
-		self.ratingMus = ""
+		self.ratingOve = 0
+		self.ratingPlt = 0
+		self.ratingAct = 0
+		self.ratingMus = 0
 		self.trailer_url="Empty"
 	
 
@@ -92,42 +92,53 @@ def hello():
 @app.route('/rate', methods=["GET","POST"])
 def rate():
 	unpickle_object
-	#for loop to make sure the data we are sending to and from the page is going to the right place
+	#for loop to make sure the data we are sending to and from the page is going to the right object
 	for movie in movies:
 		if movie.filename == request.args.get("fileName"):
-			ratingOve = movie.ratingOverall
+			rateOve = movie.ratingOve
+			ratePlt = movie.ratingPlt
+			rateAct = movie.ratingAct
+			rateMus = movie.ratingMus
 			summary = movie.review
 			video = movie.trailer_url
 			rateAgain = request.args.get("toRate", False)
 			
 			#to check if the page needs to display the rating options or the previous rating
-			if  ratingOve == "Empty" or rateAgain:
+			if  summary == "No previous review has been found" or rateAgain:
 				toRate = True
 			else:
 				toRate = False
 				#requests information from the form
 			if request.method== "POST":
 				form = request.form
-				ratePlt = form["ratingPlt"]
-				rateAct = form["ratingAct"]
-				rateMus = form["ratingMus"]
-				rateOve = form["ratingOve"]
+				#stores all the information taken from the form into variables
+				ratePlt = int(form["ratingPlt"])
+				rateAct = int(form["ratingAct"])
+				rateMus = int(form["ratingMus"])
+				rateOve = int(form["ratingOve"])
 				checkbox = form["toRateAgain"]
 				summary = form["summary"]
 				video = form["youtubeID"]
 				title = form["title"]
 				year = form["year"]
 				director = form["direct"]
+				#stores the variables into the object
 				movie.trailer_url = video
 				movie.add_summary(summary)
-				movie.ratingOverall = rate_value
+				movie.ratingOve = rateOve
+				movie.ratingPlt = ratePlt
+				movie.ratingAct = rateAct
+				movie.ratingMus = rateMus
 				movie.title = title
 				movie.year = year
 				movie.director = director
-				#if statement to see if the user wants to change the rating
+				#pickles the object so that all the information is stored to the disk
 				pickle_object()
-				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = video, toRate = toRate)
-	return render_template('rate_movie.html', rating = rating, summary = summary, video = video, toRate = toRate, pltStars = 5, actStars= 4, musStars = 3, oveStars = 2)
+				#to display the rating
+				if checkbox == "false":
+					toRate = False
+				return render_template("rate_movie.html", summary = movie.review, video = video, toRate = toRate, pltStars = int(ratePlt), actStars= int(rateAct), musStars = int(rateMus), oveStars = int(rateOve))
+	return render_template('rate_movie.html', summary = summary, video = video, toRate = toRate, pltStars = int(ratePlt), actStars= int(rateAct), musStars = int(rateMus), oveStars = int(rateOve))
 
 @app.route('/upload', methods=["POST","GET"])
 def mainUploader():
@@ -148,3 +159,4 @@ if __name__ == '__main__':
     except ValueError:
         PORT = 5555
     app.run(HOST, PORT, debug = True)
+	#copyright by SamD
