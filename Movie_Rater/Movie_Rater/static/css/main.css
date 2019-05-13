@@ -20,6 +20,7 @@ body {
 
 .rateImage
 {
+    max-height:60rem ;
     max-width: 48rem;
 }
 .iframe-container {
@@ -130,7 +131,25 @@ body {
 }
 
 .center-box{
-    display:block;
+    
     margin-left:auto;
     margin-right:auto;
+}
+
+.starImage{
+    display:inline-block;
+    max-width: 2rem;
+    max-height: 2rem;
+}
+.star-plt-body{
+   display:inline-block;
+}
+
+.star-container {
+    display: inline-block;
+    max-width: 4rem;
+}
+
+.md-form h4{
+   text-align:center;
 }

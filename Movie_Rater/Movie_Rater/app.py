@@ -21,7 +21,10 @@ class Movie(object):
 		self.director = "Place Holder"
 		self.filename = filename
 		self.review = "No previous review has been found"
-		self.rating = "No previous rating has been found 0"
+		self.ratingOverall = "Empty"
+		self.ratingPlt = ""
+		self.ratingAct = ""
+		self.ratingMus = ""
 		self.trailer_url="Empty"
 	
 
@@ -92,20 +95,23 @@ def rate():
 	#for loop to make sure the data we are sending to and from the page is going to the right place
 	for movie in movies:
 		if movie.filename == request.args.get("fileName"):
-			rating = movie.rating
+			ratingOve = movie.ratingOverall
 			summary = movie.review
 			video = movie.trailer_url
-			rateAgain = request.args.get("toRate")
+			rateAgain = request.args.get("toRate", False)
 			
 			#to check if the page needs to display the rating options or the previous rating
-			if rateAgain == "True" or movie.review =="No previous rating has been found":
+			if  ratingOve == "Empty" or rateAgain:
 				toRate = True
 			else:
 				toRate = False
 				#requests information from the form
 			if request.method== "POST":
 				form = request.form
-				rate_value = form["rating"]
+				ratePlt = form["ratingPlt"]
+				rateAct = form["ratingAct"]
+				rateMus = form["ratingMus"]
+				rateOve = form["ratingOve"]
 				checkbox = form["toRateAgain"]
 				summary = form["summary"]
 				video = form["youtubeID"]
@@ -114,14 +120,14 @@ def rate():
 				director = form["direct"]
 				movie.trailer_url = video
 				movie.add_summary(summary)
-				movie.rating = rate_value
+				movie.ratingOverall = rate_value
 				movie.title = title
 				movie.year = year
 				movie.director = director
 				#if statement to see if the user wants to change the rating
 				pickle_object()
-				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = video, toRate = False)
-	return render_template('rate_movie.html', rating = rating, summary = summary, video = video, toRate = toRate)
+				return render_template("rate_movie.html", summary = movie.review, rating = movie.rating, video = video, toRate = toRate)
+	return render_template('rate_movie.html', rating = rating, summary = summary, video = video, toRate = toRate, pltStars = 5, actStars= 4, musStars = 3, oveStars = 2)
 
 @app.route('/upload', methods=["POST","GET"])
 def mainUploader():
