@@ -88,7 +88,7 @@ def hello():
 #app.route for rating page and allows the client to view their previous rating and change it.
 @app.route('/rate', methods=["GET","POST"])
 def rate():
-	unpickle_object
+	unpickle_object()
 	#for loop to make sure the data we are sending to and from the page is going to the right place
 	for movie in movies:
 		if movie.filename == request.args.get("fileName"):
