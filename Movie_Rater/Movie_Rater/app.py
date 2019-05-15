@@ -122,6 +122,8 @@ def rate():
 				title = form["title"]
 				year = form["year"]
 				director = form["direct"]
+				if len(video) < 11:
+					video = "Empty"
 				#stores the variables into the object
 				movie.trailer_url = video
 				movie.add_summary(summary)
