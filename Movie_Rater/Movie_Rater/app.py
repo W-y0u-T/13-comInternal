@@ -147,9 +147,14 @@ def mainUploader():
 	#for the page with the uploader
 	if request.method == "POST":
 		file = request.files["file"]
+		form = request.form
 		filename = secure_filename(file.filename)
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		movies.append(Movie(filename))
+		for movie in movies:
+			if filename == movie.filename:
+				movie.trailer = form.get("youtubeID", "Empty")
+				movie.title = form.get("title")
 		pickle_object()
 	return render_template("upload.html")
 
